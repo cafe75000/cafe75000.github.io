@@ -1,5 +1,5 @@
 ![logo](./frontend.png)
 
-# 前端学习<br>Front-end Learning
+# <big>前端学习</big><br><big>Front-end Learning</big>
 
 [Get Started](README)

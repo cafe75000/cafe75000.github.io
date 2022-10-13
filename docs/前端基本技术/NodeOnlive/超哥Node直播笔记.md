@@ -46,11 +46,53 @@
   
   - nvm use 版本   --> 指定要使用的node版本
 
-#### node.js 和 JavaScript有什么区别？
+### node.js 和 JavaScript有什么区别？
 
 - node和JS的标准是一样的，遵循的都是ECMAScript
 
 - DOM BOM 是浏览器独有的，node没有DOM BOM
+
+### 什么是Node.js?
+
+- 在 Node.js 之前，JavaScript 只能运行在浏览器中，作为网页脚本使用，为网页添加一些特效，或者和服务器进行通信
+
+- 有了 Node.js 以后，JavaScript 就可以脱离浏览器，像其它编程语言一样直接在计算机上使用，想干什么就干什么，再也不受浏览器的限制了.
+
+- Node.js 不是一门新的编程语言，也不是一个 JavaScript 框架，它是一套 JavaScript 运行环境，用来支持 JavaScript 代码的执行. 用编程术语来讲，Node.js 是一个 JavaScript 运行时（Runtime）
+
+- **什么是运行时？**
+  
+  - 所谓运行时，就是程序在运行期间需要依赖的一系列组件或者工具；把这些工具和组件打包在一起提供给程序员，程序员就能运行自己编写的代码了
+  
+  - 对于 JavaScript 来说，它在运行期间需要依赖以下组件：
+    
+    - 解释器：JavaScript 是一种脚本语言，需要一边解释一边运行，用到哪些源代码就编译哪些源代码，整个过程由解释器完成。没有解释器的话，JavaScript 只是一堆纯文本文件，不能被计算机识别
+      
+      V8 引擎就是 JavaScript 解释器，它负责解析和执行 JavaScript 代码
+    
+    - 标准库：在 JavaScript 代码中会调用一些内置函数，这些函数不是我们自己编写的，而是标准库自带的
+    
+    - 本地模块：就是已经被提前编译好的模块，它们是二进制文件，和可执行文件在内部结构上没有什么区别，只是不能单独运行而已.
+      
+      JavaScript 的很多功能都需要本地模块的支持，比如：cookie、ajax 等. JavaScript 解释器需要本地模块的支持，标准库在编写时也会调用本地模块的接口，而我们编写的 JavaScript 代码一般不会直接使用本地模块，所以 Web 前端程序员触及不到它们.
+      
+      本地模块是幕后英雄，它不显山露水，但是又不可或缺.
+  
+  - 解释器、标准库、本地模块等各种组件/工具共同支撑了 JavaScript 代码的运行，它们统称为 JavaScript 运行时
+
+- **Node.js的诞生**
+  
+  -  谷歌公司在 Chrome 浏览器中集成了一种名为“V8”的 JavaScript 引擎（也即 JavaScript 解释器），它能够非常快速地解析和执行 JavaScript 代码
+  
+  - V8 引擎的强大，以及当年 JavaScript 的火爆，使得一名叫 Ryan Dahl 的程序员动起了“歪心思”，他希望在浏览器之外再为 JavaScript 构建一个运行时，让 JavaScript 能够直接在计算机上运行，这样 JavaScript 就能像 Python、Ruby、PHP 等其它脚本语言一样大展宏图，不必再受限于浏览器，只能做一些小事情.
+    
+    Ryan Dahl 和他的团队真的做到了，并且做得很好，他们将这套独立的 JavaScript 运行时命名为 Node.js
+
+- Node.js 几乎完全抛弃了浏览器，自己从头构建了一套全新的 JavaScript 运行时.  它让 JavaScript 脱离了浏览器环境，可以直接在计算机上运行，极大地拓展了 JavaScript 用途。我们应该将 JavaScript 和 Python、Java、Ruby 等其它编程语言同等对待. 
+
+简单的说 Node.js 就是运行在服务端的 JavaScript. Node.js 是一个基于 Chrome JavaScript 运行时建立的一个平台. 
+
+Node.js 是一个事件驱动 I/O 服务端 JavaScript 环境，基于 Google 的 V8 引擎，V8 引擎执行 Javascript 的速度非常快，性能非常好. 
 
 ### 进程和线程
 

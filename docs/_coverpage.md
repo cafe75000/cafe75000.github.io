@@ -1,5 +1,6 @@
 ![logo](./frontend.png)
 
-# <big>前端学习</big><br><big>Front-end Learning</big>
+# <font face=STKaiti color=#0099FF size=7>前端学习</font><br>
+# <font face=Segoe UI color=#0099FF size=7>Front-end Learning</font>
 
 [Get Started](README)

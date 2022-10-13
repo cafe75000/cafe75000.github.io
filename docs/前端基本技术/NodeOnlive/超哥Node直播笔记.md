@@ -177,6 +177,12 @@ sum(123,456,function(result){
 
 ## Promise
 
+参考  https://www.lilichao.com/index.php/2022/10/10/%e5%bc%82%e6%ad%a5%e7%bc%96%e7%a8%8b/
+
+Promise 就是一个用来存储数据的对象，但是由于它存取的方式的特殊，可以直接将异步调用的结果存储到Promise中.
+
+**Promise 是解决异步的回调地狱问题的方案**
+
 ### 创建Promise
 
 - promise有其一套特殊的存取数据的方式, 它的创建方式也很特殊
@@ -189,9 +195,9 @@ sum(123,456,function(result){
 
 - <mark>resolve和reject这2个函数都可以存储数据</mark>：
   
-  - resolve在执行正常时存储数据，
+  - resolve在执行正常时存储数据，存储的是成功的数据
   
-  - reject在执行错误时存储数据
+  - reject在执行错误时存储数据，存储的是失败的数据
   
   - 根据代码执行的情况，选择resolve或reject存储数据
 
@@ -209,7 +215,7 @@ sum(123,456,function(result){
     
     - **注意then里的2个回调函数和promise构造函数里的resolve和reject这2个函数不一样，不是一回事！**
       
-      - resolve和reject这2个函数不是我们创建的，是Promise创建的，用来存储数据的函数
+      - resolve和reject这2个函数不是我们创建的，是Promise内部创建的，用来存储数据的函数
       
       - then里的2个函数是我们创建的，用来读取数据的
 
@@ -280,5 +286,122 @@ promise.then((result) =>{
   - 但是finally的回调函数中不会接收到数据，无论是成功的数据还是失败的数据都接收不到
   
   - finally()通常用来编写一些无论成功与否都会执行的代码
+
+## Promise 的链式调用解决回调地狱
+
+```js
+function sum(a,b){
+  return new Promise((resolve, reject)=>{
+    setTimeout(()=>{
+      resolve(a+b)
+    },1000)
+  })
+}
+
+// 回调地狱
+ sum(123,456).then(result=>{
+    sum(result, 7).then(result =>{
+         sum(result, 8).then(result => {
+             console.log(result)
+         })
+     })
+ })
+
+// 链式调用解决回调地狱
+sum(123, 456)
+     .then(result => result + 7)
+     .then(result => result + 8)
+     .then(result => console.log(result))
+```
+
+- Promise 中的 <mark>then, catch, finally 这3个方法都会返回一个新的Promise</mark> 
+  
+  ```js
+  return new Promise()
+  ```
+
+- Promise中会存储回调函数的返回值，return新Promise是为了拿到数据
+
+- **注意：finally的返回值，不会存储到新的Promise中**
+
+- 对Promise进行链式调用时，后边的方法(即 then and catch) 读取的是上一步的执行结果，如果上一步的执行结果不是当前想要的结果，则直接跳过当前的方法
+
+- 当Promise出现异常时，而整个调用链中没有出现catch，则异常会向外抛出
+
+- catch自身有异常或错误时，它的错误由后续的catch代码解决, 因此catch应该写在最后，统一处理所有的错误
+
+```js
+const promise = new Promise((resolve, reject)=>{
+    resolve("第一步执行结果")
+})
+
+const promise2 = promise.then(result => {
+    console.log("收到结果：", result)
+    return "第二步执行结果" // 会作为新的结果存储到新Promise中
+})
+
+const promise3 = promise2.then(result => {
+    console.log("收到结果：", result)
+    return "第三步执行结果" // 会作为新的结果存储到新Promise中
+})
+```
+
+```js
+// 简化一些可以这样写
+const promise = new Promise((resolve, reject)=>{
+    resolve("第一步执行结果")
+})
+
+promise
+    .then(result => {
+        console.log("收到结果：", result)
+        return "第二步执行结果" // 会作为新的结果存储到新Promise中
+      })
+    .then(result => {
+        console.log("收到结果：", result)
+        return "第三步执行结果" // 会作为新的结果存储到新Promise中
+      })
+```
+
+## Promise的静态方法
+
+参考 https://www.lilichao.com/index.php/2022/10/10/%e5%bc%82%e6%ad%a5%e7%bc%96%e7%a8%8b/
+
+Promise的静态方法直接通过Promise类去调用，这些方法可以帮助我们完成一些更加复杂的异步操作. 
+
+静态方法：
+
+- Promise.reject() 创建一个立即拒绝的Promise
+
+- Promise.all([...]) 同时返回多个Promise的执行结果，其中有一个报错，就返回错误
+
+- Promise.allSettled([...]) 同时返回多个Promise的执行结果(无论成功或失败)
+  
+  - 成功：{status: 'fulfilled', value: result}
+  
+  - 失败：{status: 'rejected', reason: error}
+
+- Promise.race([...]) 返回执行最快的Promise(不考虑对错), 而忽略其他未执行完的Promise
+
+- Promise.any([...]) 返回执行第1个最快完成的Promise，如果所有的Promise都失败才会返回一个错误信息
+
+- Promise.resolve  用来创建一个新的Promise实例，且直接通过resolve存入一个数据
+
+- Promise.reject  用来创建一个新的Promise实例，且直接通过reject存入一个数据
+
+```js
+function sum(a, b) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(a + b)
+        }, 5000);
+    })
+}
+
+Promise.all([sum(1, 1), sum(2, 2), sum(3, 3)])
+    .then((result) => {
+        console.log(result)
+    })
+```
 
 [目录](README)

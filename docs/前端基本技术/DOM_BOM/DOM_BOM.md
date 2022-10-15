@@ -587,8 +587,8 @@ setInterval() 每隔一段时间就将函数添加到消息队列中，但是如
 - 当我们触发一个事件时，其响应函数并不是直接就添加到调用栈中的, 因为调用栈中有可能会存在一些还没有执行完的代码
 
 - 事件触发后，JS 引擎是将事件响应函数插入到消息队列中排队
-
-- 
+  
+  
 
 ![eventloop](C:\Users\lei\Desktop\cafe75000.github.io\docs\前端基本技术\DOM_BOM\eventLoop.gif)
 

@@ -472,6 +472,8 @@ JS 是单线程的，它的运行是基于事件循环机制(event loop), 涉及
 
 - 当调用栈里面的代码执行完毕后，任务队列中的代码才会按照顺序依次进入到栈中执行
 
+  ![event loop](C:\Users\lei\Desktop\cafe75000.github.io\docs\前端基本技术\DOM_BOM\eventLoop.gif)
+
 - JS中任务队列有两种：
   
   - 宏任务队列 （大部分代码都去宏任务队列中去排队）

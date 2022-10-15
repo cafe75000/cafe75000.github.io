@@ -588,6 +588,6 @@ setInterval() 每隔一段时间就将函数添加到消息队列中，但是如
 
 - 事件触发后，JS 引擎是将事件响应函数插入到消息队列中排队
 
-![image](https://github.com/cafe75000/cafe75000.github.io/blob/main/docs/%E5%89%8D%E7%AB%AF%E5%9F%BA%E6%9C%AC%E6%8A%80%E6%9C%AF/DOM_BOM/eventLoop.gif)
+![eventloop](https://github.com/cafe75000/cafe75000.github.io/blob/main/docs/%E5%89%8D%E7%AB%AF%E5%9F%BA%E6%9C%AC%E6%8A%80%E6%9C%AF/Allimages/eventLoop.gif)
 
 [目录](README)

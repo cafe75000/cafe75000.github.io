@@ -219,13 +219,13 @@ sum(123, 456, (result)=>{
 - promise有其一套特殊的存取数据的方式，这个方式使得promise里面可以存储异步调用的结果
 
 ```js
-function sum(a,b,callback){
-  callback()
+// 回调函数
+function sum(a,b,cb){
+  cb(a+b)
 }
 
-// function 是 callback 的实参
 sum(123,456,function(result){
-  console.log(result)
+  console.log(result) // 579
 })
 ```
 
@@ -471,7 +471,6 @@ JS 是单线程的，它的运行是基于事件循环机制(event loop), 涉及
 - 任务队列，也是一种数据结构，特点是**先进先出(FIFO)**，任务队列里面放的是将要执行的代码
 
 - 当调用栈里面的代码执行完毕后，任务队列中的代码才会按照顺序依次进入到栈中执行
-
 
 - JS中任务队列有两种：
   

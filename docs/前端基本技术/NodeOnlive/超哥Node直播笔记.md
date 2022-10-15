@@ -82,7 +82,7 @@
 
 - **Node.js的诞生**
   
-  -  谷歌公司在 Chrome 浏览器中集成了一种名为“V8”的 JavaScript 引擎（也即 JavaScript 解释器），它能够非常快速地解析和执行 JavaScript 代码
+  - 谷歌公司在 Chrome 浏览器中集成了一种名为“V8”的 JavaScript 引擎（也即 JavaScript 解释器），它能够非常快速地解析和执行 JavaScript 代码
   
   - V8 引擎的强大，以及当年 JavaScript 的火爆，使得一名叫 Ryan Dahl 的程序员动起了“歪心思”，他希望在浏览器之外再为 JavaScript 构建一个运行时，让 JavaScript 能够直接在计算机上运行，这样 JavaScript 就能像 Python、Ruby、PHP 等其它脚本语言一样大展宏图，不必再受限于浏览器，只能做一些小事情.
     
@@ -127,6 +127,10 @@ Node.js 是一个事件驱动 I/O 服务端 JavaScript 环境，基于 Google �
 ### 异步
 
 - 什么是异步？可理解为一段代码的执行不会影响到其他的程序
+
+- 如果在函数返回的时候, 调用者还不能够得到预期结果, 而是需要在将来通过一定的手段得到, 那么这个函数就是异步的.
+  
+   比如说发一个网络请求, 我们告诉主程序等到接收到数据后再通知我, 然后我们就可以去做其他的事情了. **当异步完成后, 会通知到我们**, 但是此时可能程序正在做其他的事情, 所以即使异步完成了也需要在一旁等待, 等到程序空闲下来才有时间去看哪些异步已经完成了, 再去执行. 这也就是定时器并不能精确在指定时间后输出回调函数结果的原因.
 
 - 异步的问题：异步代码的执行结果无法通过return获得
 
@@ -198,7 +202,15 @@ sum(123, 456, (result)=>{
 
 - 回调函数是JS中非常重要的特点. JS 中使用了大量的异步代码
 
-- 因为异步代码没有办法直接return结果，它是通过回调函数获得代码执行后的返回结果.
+- 当某个函数被作为参数, 传递给另外一个函数, 或者传递给宿主环境, 然后该函数在函数内部或者在宿主环境中被调用, 我们称之为回调函数. 
+  
+  回调函数有同步和异步两种, 同步回调和异步回调的最大区别在于**同步回调函数是在执行函数内部被执行的, 而异步回调函数是在执行函数外部被执行的**.
+  
+  比如 forEach 里的回调函数, 是在 forEach 函数内部执行, 所以是个同步回调. 
+  
+  再比如 setTimeout 里的回调函数, V8 执行 setTimeout 时, 会立即返回, 等待 x 毫秒之后, 该回调函数才会被 V8 调用, 该回调函数并不是在 setTimeout 函数内部被执行的, 所以这是一个异步回调.
+
+- 因为**异步代码没有办法直接return结果，它是通过回调函数获得代码执行后的返回结果**.
 
 - 也就是说，异步调用必须通过回调函数来返回结果，但是当我们进行一些复杂的调用时，会出现“回调地狱”，回调函数一多就很痛苦.
 
@@ -293,7 +305,7 @@ promise.then((result) =>{
       
       - rejected  拒绝， 出错了，通过reject存储数据或出错时的状态
     
-    - <mark>state只能修改一次，修改以后永远不会再变</mark>
+    - <mark>无论成功的数据还是失败的数据，state只能修改一次，修改以后永远不会再变</mark>
 
 - **流程(Promise的原理)：**
   
@@ -444,6 +456,129 @@ Promise.all([sum(1, 1), sum(2, 2), sum(3, 3)])
     .then((result) => {
         console.log(result)
     })
+```
+
+## 宏任务和微任务
+
+参考 
+
+https://www.lilichao.com/index.php/2022/10/12/%e5%ae%8f%e4%bb%bb%e5%8a%a1%e5%92%8c%e5%be%ae%e4%bb%bb%e5%8a%a1/
+
+JS 是单线程的，它的运行是基于事件循环机制(event loop), 涉及到执行栈和任务队列(或消息队列)：
+
+- 栈是一种数据结构，特点是**后进先出(LIFO)**，调用栈里面，放的是要执行的代码
+
+- 任务队列，也是一种数据结构，特点是**先进先出(FIFO)**，任务队列里面放的是将要执行的代码
+
+- 当调用栈里面的代码执行完毕后，任务队列中的代码才会按照顺序依次进入到栈中执行
+
+- JS中任务队列有两种：
+  
+  - 宏任务队列 （大部分代码都去宏任务队列中去排队）
+  
+  - 微任务队列 （Promise的回调函数（then、catch、finally）去微任务队列中排队）
+
+- 整个执行流程：
+  
+  1. 执行调用栈中的代码
+  
+  2. 执行微任务队列中的所有任务
+  
+  3. 执行宏任务队列中的所有任务
+
+```js
+// 定时器的作用是间隔一段时间后，将函数放入到任务队列中
+ setTimeout(() => {
+     console.log(1)
+ }, 0)
+```
+
+- JS提供了一个函数：queueMicrotask() 用来向微任务队列中添加一个任务
+
+```js
+// 将箭头函数里的代码放入到微任务队列中
+queueMicrotask(() => {
+    console.log(2)
+})
+```
+
+```js
+    console.log(1);
+
+    setTimeout(() => console.log(2));
+
+    Promise.resolve().then(() => console.log(3));
+
+    Promise.resolve().then(() => setTimeout(() => console.log(4)));
+
+    Promise.resolve().then(() => console.log(5));
+
+    setTimeout(() => console.log(6));
+
+    console.log(7);                                           
+
+    // 1 7 3 5 2 6 4
+```
+
+```js
+/* 
+    定义类的思路
+        1. 先把功能都分析清楚了，再动手
+        2. 写一点想一点，走一步看一步
+*/
+
+const PROMISE_STATE = {
+    PENDING:0,
+    FULFILLED:1,
+    REJECTED:2
+}
+
+class MyPromise {
+
+    // 创建一个变量用来存储Promise的结果
+    #result
+    // 创建一个变量来记录Promise的状态
+    #state = PROMISE_STATE.PENDING //pending 0 fulfilled 1 rejected 2
+
+    constructor(executor) {
+        // 接收一个 执行器 作为参数
+        executor(this.#resolve.bind(this), this.#reject.bind(this)) // 调用回调函数
+    }
+
+    // 私有的resolve() 用来存储成功的数据
+    #resolve(value) {
+        // 禁止值被重复修改
+        // 如果state不等于0，说明值已经被修改 函数直接返回
+        if (this.#state !== 0) return
+
+        this.#result = value
+        this.#state = 1 // 数据填充成功
+    }
+
+    // #resolve = () => {
+    //     console.log(this)
+    // }
+
+    // 私有的reject() 用来存储拒绝的数据
+    #reject(reason) { }
+
+
+    // 添加一个用来读取数据的then方法
+    then(onFulfilled, onRejected) {
+        if (this.#state === 1) {
+            onFulfilled(this.#result)
+        }
+    }
+}
+
+// 自定义 promise
+const mp = new MyPromise((resolve, reject) => {
+    resolve("孙悟空")
+})
+
+mp.then((result) => {
+    console.log("读取数据", result)
+})
 ```
 
 [目录](README)

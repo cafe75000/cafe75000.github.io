@@ -304,31 +304,31 @@ yarn 是 Facebook 开源的新的包管理器，可以用来代替 npm.
     yarn remove xxx                npm uninstall xxx --save(-dev)
     yarn run xxx                   npm run xxx
    ```
+
+## 5. Pnpm
+
+[GitHub - pnpm/pnpm: Fast, disk space efficient package manager -- 快速的，节省磁盘空间的包管理工具](https://github.com/pnpm/pnpm)
+
+1. **安装**
    
+   ```shell
+   npm install -g pnpm
+   ```
+
+2. **命令**
    
+   ```shell
+   pnpm init // 初始化项目，添加package.json
    
-   ## 5. Pnpm
+   pnpm add xxx // 添加依赖
    
-   1. **安装**
-      
-      ```shell
-      npm install -g pnpm
-      ```
+   pnpm add -D xxx // 添加开发依赖
    
-   2. **命令**
-      
-      ```shell
-      pnpm init // 初始化项目，添加package.json）
-      
-      pnpm add xxx // 添加依赖
-      
-      pnpm add -D xxx // 添加开发依赖
-      
-      pnpm add -G xxx //添加全局包
-      
-      pnpm install // 安装依赖
-      
-      pnpm remove xxx // 移除包
-      ```
+   pnpm add -G xxx //添加全局包
+   
+   pnpm install // 安装依赖
+   
+   pnpm remove xxx // 移除包
+   ```
    
    [目录](README)

@@ -8,7 +8,7 @@ Npm 全称是 Node Package Manager , 是 Node 默认的包管理器，也是一�
 
 官网 [https://npmjs.org](https://npmjs.org)
 
-##### 什么是包？
+- **什么是包？**
 
 <mark>Node.js 的包遵循 CommonJS 规范</mark>，将一组相关的模块(module) 组合在一起，形成一个完整的工具，该工具称为包.
 
@@ -18,8 +18,7 @@ Npm 全称是 Node Package Manager , 是 Node 默认的包管理器，也是一�
 
 包：若干个 JS 文件组成包
 
-##### 一个标准的包，应该包含哪些内容？
-
+- **一个标准的包，应该包含哪些内容？**
 1. package.json ------   描述文件(包的“说明书”，必须要有！！！)
 
 2. bin --------------------- 可执行二进制文件
@@ -32,7 +31,7 @@ Npm 全称是 Node Package Manager , 是 Node 默认的包管理器，也是一�
 
 **其中 package.json 必须有，其他的 bin, lib, doc, test 可以省略**
 
-##### 如何让一个普通文件夹变成一个包？
+- **如何让一个普通文件夹变成一个包？**
 
 让这个文件夹拥有一个 package.json 文件即可，且 package.json 里面的内容要合法
 
@@ -40,11 +39,11 @@ Npm 全称是 Node Package Manager , 是 Node 默认的包管理器，也是一�
 
 **包的要求：不能有中文，不能有大写字母，不要以数字开头，不能与 npm 仓库上其他包同名**
 
-##### npm 与 node 的关系？
+- **npm 与 node 的关系？**
 
 安装 node 后就自动安装了 npm，npm 是 node 官方出的包管理器，专门用于管理包
 
-##### Npm 的作用
+- **Npm 的作用**
 
 Node 的包管理器(`npm`)，功能极其强大：通过 npm 可以对 Node 的工具包进行搜索、下载、安装、删除、上传。
 
@@ -55,8 +54,7 @@ Node 的包管理器(`npm`)，功能极其强大：通过 npm 可以对 Node 的
 1. 允许用户从 NPM 服务器下载别人编写的第三方包到本地使用。
 2. 允许用户从 NPM 服务器下载并安装别人编写的命令行程序到本地使用。
 3. 允许用户将自己编写的包上传到 NPM 服务器供别人使用。
-
-##### Npm 的安装
+- **Npm 的安装**
 
 npm 不需要单独安装, 在安装 Node 的时候，会连带一起安装 npm, 可以通过以下命令在 cmd 终端检测是否成功安装：
 
@@ -306,6 +304,8 @@ yarn 是 Facebook 开源的新的包管理器，可以用来代替 npm.
     yarn remove xxx                npm uninstall xxx --save(-dev)
     yarn run xxx                   npm run xxx
    ```
+   
+   
    
    ## 5. Pnpm
    

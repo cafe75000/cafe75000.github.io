@@ -14,5 +14,5 @@
 [HTTP](前端基本技术/HTTP/Http) <br><br>
 [相关 API](前端基本技术/API相关/API相关) <br><br>
 [Axios](前端基本技术/Axios/Axios) <br><br>
-[Npm&Yarn](前端基本技术/Npm&Yarn/Npm&Yarn) <br><br>
+[Npm&Yarn&Pnpm](前端基本技术/Npm&Yarn&Pnpm/Npm&Yarn) <br><br>
 [JavaScript 模块化](前端基本技术/JavaScript模块化/JS模块化)<br><br>

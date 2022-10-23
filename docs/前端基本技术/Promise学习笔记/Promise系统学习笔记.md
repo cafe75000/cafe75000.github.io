@@ -817,6 +817,10 @@ mineReadFile("./resource/content.txt").then((value) => {
 > ```
 > 
 > 上面代码中，调用`resolve(1)`以后，后面的`console.log(2)`还是会执行，并且会首先打印出来。这是因为立即 resolved 的 Promise 是在本轮事件循环的末尾执行，总是晚于本轮循环的同步任务。
+> 
+> PS: 理解事件循环
+> 
+> ![](C:\Users\lei\Desktop\cafe75000.github.io\docs\前端基本技术\Promise学习笔记\Promise系统学习笔记中的图片\eventLoop.gif)
 
 #### ⑨ 建议在修改状态函数前加 return
 

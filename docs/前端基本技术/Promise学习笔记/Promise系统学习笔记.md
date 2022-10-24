@@ -820,7 +820,7 @@ mineReadFile("./resource/content.txt").then((value) => {
 > 
 > PS: 理解事件循环
 > 
-> ![](C:\Users\lei\Desktop\cafe75000.github.io\docs\前端基本技术\Promise学习笔记\Promise系统学习笔记中的图片\eventLoop.gif)
+> ![事件循环](C:\Users\lei\Desktop\cafe75000.github.io\docs\前端基本技术\Promise学习笔记\Promise系统学习笔记中的图片\eventLoop.gif)
 
 #### ⑨ 建议在修改状态函数前加 return
 

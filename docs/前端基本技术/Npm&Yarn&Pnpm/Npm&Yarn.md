@@ -324,7 +324,7 @@ yarn 是 Facebook 开源的新的包管理器，可以用来代替 npm.
    
    pnpm add -D xxx // 添加开发依赖
    
-   pnpm add -G xxx //添加全局包
+   pnpm add -g xxx //添加全局包
    
    pnpm install // 安装依赖
    

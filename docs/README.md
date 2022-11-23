@@ -4,7 +4,7 @@
 \-\- From Nina3375 <br><br>
 
 > An awesome project. Fighting Nina3375!<br><br>
-> 特此感谢北京尚硅谷李立超老师的无私帮助!
+> 特此感谢北京李立超老师的无私帮助!
 
 [封面](_coverpage)
 
